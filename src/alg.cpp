@@ -45,23 +45,23 @@ int countPairs2(int *arr, int len, int value) {
     return count;
 }
 int binarySearch(int *arr, int len, int target, int exclude_index) {
-    int result = -1;
+    int left = 0;
+    int right = len - 1;
     while (left <= right) {
         int mid = left + (right - left) / 2;
+        if (mid == exclude_index) {
+            mid++;
+            if (mid > right) break;
+        }
         if (arr[mid] == target) {
-            result = mid;
-            if (searchFirst) {
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
+            return mid;
         } else if (arr[mid] < target) {
             left = mid + 1;
         } else {
             right = mid - 1;
         }
     }
-    return result;
+    return -1;
 }
 int countPairs3(int *arr, int len, int value) {
   int count = 0;
